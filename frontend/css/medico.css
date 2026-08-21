@@ -1,0 +1,147 @@
+/* ÁREA DOS PACIENTES */
+#triagens{
+
+    display:grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap:20px;
+
+    width:100%;
+
+}
+
+
+/* CARD DO PACIENTE */
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    min-height:320px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.25);
+
+    border-top:7px solid #ff416c;
+
+    transition:.3s;
+
+}
+
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+/* NOME DO PACIENTE */
+
+.card h3{
+
+    color:#ff416c;
+
+    font-size:24px;
+
+    text-align:center;
+
+    padding:12px;
+
+    background:#ffe4ec;
+
+    border-radius:15px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* INFORMAÇÕES */
+
+.card p{
+
+    background:#f4f4f4;
+
+    padding:8px;
+
+    border-radius:10px;
+
+    margin:8px 0;
+
+    font-size:14px;
+
+    text-align:center;
+
+}
+
+
+
+/* BOTÃO */
+
+.card button{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:linear-gradient(
+        90deg,
+        #ff416c,
+        #ff4b2b
+    );
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+/* TELAS MENORES */
+
+@media(max-width:1200px){
+
+    #triagens{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+}
+
+
+@media(max-width:900px){
+
+    #triagens{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    #triagens{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

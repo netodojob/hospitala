@@ -1,0 +1,259 @@
+/*======================================
+              RESET
+======================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/*======================================
+              BODY
+======================================*/
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        -45deg,
+        #0f2027,
+        #203a43,
+        #2c5364,
+        #1abc9c,
+        #16a085
+    );
+
+    background-size:400% 400%;
+
+    animation:fundo 12s infinite ease;
+}
+
+/*======================================
+          CARD PRINCIPAL
+======================================*/
+
+.container{
+
+    width:500px;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(20px);
+
+    border:2px solid rgba(255,255,255,.2);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+    animation:entrada .8s ease;
+
+}
+
+/*======================================
+             TÍTULO
+======================================*/
+
+.container h2{
+
+    color:white;
+
+    text-align:center;
+
+    font-size:34px;
+
+    margin-bottom:30px;
+
+    text-shadow:2px 2px 10px black;
+
+}
+
+/*======================================
+            INPUTS
+======================================*/
+
+input,
+select{
+
+    width:100%;
+
+    padding:16px;
+
+    margin:12px 0;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:15px;
+
+    background:white;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+input:focus,
+select:focus{
+
+    transform:scale(1.03);
+
+    box-shadow:0 0 18px #1abc9c;
+
+}
+
+/*======================================
+          CAMPO DE FOTO
+======================================*/
+
+input[type=file]{
+
+    background:white;
+
+    cursor:pointer;
+
+    padding:12px;
+
+}
+
+/*======================================
+             BOTÃO
+======================================*/
+
+button{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:40px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:linear-gradient(
+        90deg,
+        #16a085,
+        #1abc9c,
+        #00d2d3
+    );
+
+    background-size:300%;
+
+    transition:.5s;
+
+    box-shadow:0 15px 30px rgba(26,188,156,.4);
+
+}
+
+button:hover{
+
+    background-position:right center;
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 40px rgba(26,188,156,.6);
+
+}
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+/*======================================
+           ANIMAÇÕES
+======================================*/
+
+@keyframes fundo{
+
+    0%{
+
+        background-position:0% 50%;
+
+    }
+
+    50%{
+
+        background-position:100% 50%;
+
+    }
+
+    100%{
+
+        background-position:0% 50%;
+
+    }
+
+}
+
+@keyframes entrada{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*======================================
+            RESPONSIVO
+======================================*/
+
+@media(max-width:600px){
+
+.container{
+
+    width:92%;
+
+    padding:25px;
+
+}
+
+.container h2{
+
+    font-size:28px;
+
+}
+
+button{
+
+    font-size:16px;
+
+}
+
+}
