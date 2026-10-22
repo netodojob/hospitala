@@ -1,259 +1,151 @@
-/*======================================
-              RESET
-======================================*/
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+body.site-page {
+    padding: clamp(18px, 4vw, 48px) 18px;
 }
 
-/*======================================
-              BODY
-======================================*/
-
-body{
-
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:linear-gradient(
-        -45deg,
-        #0f2027,
-        #203a43,
-        #2c5364,
-        #1abc9c,
-        #16a085
-    );
-
-    background-size:400% 400%;
-
-    animation:fundo 12s infinite ease;
+body.site-page .container {
+    width: min(920px, 100%);
+    padding: clamp(22px, 4vw, 42px);
 }
 
-/*======================================
-          CARD PRINCIPAL
-======================================*/
-
-.container{
-
-    width:500px;
-
-    padding:40px;
-
-    border-radius:25px;
-
-    background:rgba(255,255,255,.15);
-
-    backdrop-filter:blur(20px);
-
-    border:2px solid rgba(255,255,255,.2);
-
-    box-shadow:0 20px 50px rgba(0,0,0,.35);
-
-    animation:entrada .8s ease;
-
+body.site-page .container h2 {
+    position: relative;
+    margin: 0 0 30px;
+    padding-bottom: 19px;
+    color: #18333b;
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 750;
+    letter-spacing: -.03em;
+    text-align: left;
 }
 
-/*======================================
-             TÍTULO
-======================================*/
-
-.container h2{
-
-    color:white;
-
-    text-align:center;
-
-    font-size:34px;
-
-    margin-bottom:30px;
-
-    text-shadow:2px 2px 10px black;
-
+body.site-page .container h2::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: #e1e9eb;
+    content: "";
 }
 
-/*======================================
-            INPUTS
-======================================*/
-
-input,
-select{
-
-    width:100%;
-
-    padding:16px;
-
-    margin:12px 0;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:15px;
-
-    background:white;
-
-    font-size:16px;
-
-    transition:.3s;
-
+body.site-page .container h2::before {
+    position: absolute;
+    z-index: 1;
+    bottom: -1px;
+    left: 0;
+    width: 64px;
+    height: 3px;
+    border-radius: 3px;
+    background: #138779;
+    content: "";
 }
 
-input:focus,
-select:focus{
-
-    transform:scale(1.03);
-
-    box-shadow:0 0 18px #1abc9c;
-
+body.site-page .container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 18px;
+    align-content: start;
 }
 
-/*======================================
-          CAMPO DE FOTO
-======================================*/
-
-input[type=file]{
-
-    background:white;
-
-    cursor:pointer;
-
-    padding:12px;
-
+body.site-page .container h2,
+body.site-page .container #nome,
+body.site-page .container #endereco,
+body.site-page .container #foto,
+body.site-page .container button {
+    grid-column: 1 / -1;
 }
 
-/*======================================
-             BOTÃO
-======================================*/
-
-button{
-
-    width:100%;
-
-    margin-top:20px;
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:40px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    color:white;
-
-    cursor:pointer;
-
-    background:linear-gradient(
-        90deg,
-        #16a085,
-        #1abc9c,
-        #00d2d3
-    );
-
-    background-size:300%;
-
-    transition:.5s;
-
-    box-shadow:0 15px 30px rgba(26,188,156,.4);
-
+body.site-page .container input,
+body.site-page .container select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 50px;
+    margin: 0 0 16px;
+    padding: 12px 15px;
+    border: 1px solid #d7e2e4;
+    border-radius: 11px;
+    background-color: #fff;
+    box-shadow: none;
+    color: #18333b;
+    font-size: 15px;
+    transition: border-color .18s ease, box-shadow .18s ease;
 }
 
-button:hover{
-
-    background-position:right center;
-
-    transform:translateY(-5px);
-
-    box-shadow:0 20px 40px rgba(26,188,156,.6);
-
+body.site-page .container input::placeholder {
+    color: #87979b;
 }
 
-button:active{
-
-    transform:scale(.96);
-
+body.site-page .container input:hover,
+body.site-page .container select:hover {
+    border-color: #b5ccca;
 }
 
-/*======================================
-           ANIMAÇÕES
-======================================*/
+body.site-page .container input:focus,
+body.site-page .container select:focus {
+    border-color: #138779;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(19, 135, 121, .12);
+    transform: none;
+}
 
-@keyframes fundo{
+body.site-page .container input[type="file"] {
+    min-height: 60px;
+    padding: 10px 12px;
+    border: 1px dashed #b8cecc;
+    background: #f7fbfa;
+    color: #526970;
+    cursor: pointer;
+}
 
-    0%{
+body.site-page .container input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 9px 13px;
+    border: 0;
+    border-radius: 8px;
+    color: #176c64;
+    background: #e4f4f1;
+    font: 650 13px "Segoe UI", Arial, sans-serif;
+    cursor: pointer;
+}
 
-        background-position:0% 50%;
+body.site-page .container button {
+    min-height: 50px;
+    margin: 5px 0 0;
+    border-radius: 11px;
+    font-size: 15px;
+    letter-spacing: .01em;
+}
 
+body.site-page .container button::before {
+    content: "✓";
+    margin-right: 9px;
+    font-size: 17px;
+}
+
+body.site-page .container button:hover {
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    body.site-page {
+        padding: 14px 10px;
     }
 
-    50%{
-
-        background-position:100% 50%;
-
+    body.site-page .container {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 22px 18px;
+        border-radius: 16px;
     }
 
-    100%{
-
-        background-position:0% 50%;
-
+    body.site-page .container h2 {
+        margin-bottom: 22px;
     }
 
-}
-
-@keyframes entrada{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(40px);
-
+    body.site-page .container input,
+    body.site-page .container select {
+        min-height: 48px;
+        margin-bottom: 12px;
     }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/*======================================
-            RESPONSIVO
-======================================*/
-
-@media(max-width:600px){
-
-.container{
-
-    width:92%;
-
-    padding:25px;
-
-}
-
-.container h2{
-
-    font-size:28px;
-
-}
-
-button{
-
-    font-size:16px;
-
-}
-
 }

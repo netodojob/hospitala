@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedFlow | Entrar</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
 </head>
-<body>
+<body class="site-page login-page">
 <div class="container">
 <div class="logo-box">
     <img src="ChatGPT Image 6 de ago. de 2026, 12_54_20.png" width="330px"  class="logo">
@@ -15,7 +19,7 @@
 </div>
 <script>
 function login() {
-  fetch("/login", {
+  fetch("http://localhost:3000/login", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({
@@ -30,6 +34,13 @@ function login() {
     if(data.tipo === "atendimento") location.href = "atendimento.html";
   });
 }
+//atalho secreto : ctrl + alt + redirect para admin.html
+window.addEventListener("keydown", function(e) {
+  if (e.ctrlKey && e.altKey && e.key === "a" || e.key === "A") {
+    e.preventDefault();
+    window.location.href = "admin.html";
+  }
+});
 </script>
 </body>
 </html>

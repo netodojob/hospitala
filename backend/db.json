@@ -14,6 +14,16 @@
       "usuario": "atendimento",
       "senha": "123",
       "tipo": "atendimento"
+    },
+    {
+      "usuario": "sla",
+      "senha": "123",
+      "tipo": "atendimento"
+    },
+    {
+      "usuario": "mauricio",
+      "senha": "123",
+      "tipo": "atendimento"
     }
   ],
   "pacientes": [
@@ -22,7 +32,7 @@
       "nome": "",
       "cpf": "",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "concluida",
       "createdAt": "2026-04-22T11:35:28.699Z"
     },
     {
@@ -30,7 +40,7 @@
       "nome": "jesus",
       "cpf": "0000000000000",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-04-22T13:51:28.237Z"
     },
     {
@@ -38,7 +48,7 @@
       "nome": "kinder ovo ",
       "cpf": "6546468844",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-04-22T14:41:28.454Z"
     },
     {
@@ -46,7 +56,7 @@
       "nome": "enzo",
       "cpf": "545343554",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-04-22T15:31:26.695Z"
     },
     {
@@ -54,7 +64,7 @@
       "nome": "teste08",
       "cpf": "rgregregergerg",
       "tipo": "Convenio",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-05-04T11:58:10.000Z"
     },
     {
@@ -62,7 +72,7 @@
       "nome": "teste08",
       "cpf": "45345435434353",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-05-04T11:58:23.949Z"
     },
     {
@@ -70,7 +80,7 @@
       "nome": "yan",
       "cpf": "53434449.9.449",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-05-14T14:01:13.416Z"
     },
     {
@@ -78,7 +88,7 @@
       "nome": "test50",
       "cpf": "3253545235",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-05-14T14:16:59.883Z"
     },
     {
@@ -86,7 +96,7 @@
       "nome": "adriana",
       "cpf": "45455435",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-05-15T11:16:21.579Z"
     },
     {
@@ -94,8 +104,148 @@
       "nome": "vfvvfbv",
       "cpf": "12213332112",
       "tipo": "Particular",
-      "status": "triagem",
+      "status": "em_triagem",
       "createdAt": "2026-08-06T15:43:46.574Z"
+    },
+    {
+      "id": 1787667561189,
+      "nome": "",
+      "cpf": "",
+      "status": "em_triagem",
+      "createdAt": "2026-08-25T14:19:21.189Z"
+    },
+    {
+      "id": 1787667563867,
+      "nome": "",
+      "cpf": "",
+      "status": "em_triagem",
+      "createdAt": "2026-08-25T14:19:23.867Z"
+    },
+    {
+      "id": 1787667911197,
+      "nome": "mauricio",
+      "cpf": "321312321421414",
+      "tipo": "Convenio",
+      "status": "em_triagem",
+      "createdAt": "2026-08-25T14:25:11.197Z"
+    },
+    {
+      "id": 1787668443381,
+      "nome": "maurici0",
+      "cpf": "157",
+      "tipo": "Convenio",
+      "status": "concluida",
+      "createdAt": "2026-08-25T14:34:03.381Z"
+    },
+    {
+      "id": 1787748576692,
+      "nome": "ffsvsvd",
+      "cpf": "123",
+      "tipo": "Convenio",
+      "status": "concluida",
+      "createdAt": "2026-08-26T12:49:36.692Z"
+    },
+    {
+      "id": 1792668910485,
+      "nome": "feffs",
+      "cpf": "fsfesf",
+      "documento": "fsfesf",
+      "sexo": "Masculino",
+      "motivo": "Consulta",
+      "nomeMae": "frsfsf",
+      "estadoCivil": "Casado",
+      "endereco": "fsefe",
+      "telefone": "fefsfe",
+      "email": "fesfs",
+      "contatoEmergencia": "eff",
+      "tipo": "Particular",
+      "status": "em_triagem",
+      "createdAt": "2026-10-22T11:35:10.485Z"
+    },
+    {
+      "id": 1792670397996,
+      "nome": "dwdfefesfe",
+      "cpf": "efsfef",
+      "documento": "efsfef",
+      "sexo": "Feminino",
+      "motivo": "Consulta",
+      "nomeMae": "esfefesfesf",
+      "estadoCivil": "Solteiro",
+      "endereco": "efef",
+      "telefone": "efesf",
+      "email": "fefe",
+      "contatoEmergencia": "sef",
+      "tipo": "Particular",
+      "status": "concluida",
+      "createdAt": "2026-10-22T11:59:57.996Z"
+    },
+    {
+      "id": 1792670636634,
+      "nome": "scvzscvzs",
+      "cpf": "szczsc",
+      "documento": "szczsc",
+      "sexo": "Masculino",
+      "motivo": "Consulta",
+      "nomeMae": "scs",
+      "estadoCivil": "Casado",
+      "endereco": "szczs",
+      "telefone": "vdzvd",
+      "email": "dv",
+      "contatoEmergencia": "dvdv",
+      "tipo": "Particular",
+      "status": "em_triagem",
+      "createdAt": "2026-10-22T12:03:56.634Z"
+    },
+    {
+      "id": 1792670790187,
+      "nome": "fesves",
+      "cpf": "efesf",
+      "documento": "efesf",
+      "sexo": "Feminino",
+      "motivo": "Exame",
+      "nomeMae": "fesf",
+      "estadoCivil": "Solteiro",
+      "endereco": "fesf",
+      "telefone": "efesf",
+      "email": "efe",
+      "contatoEmergencia": "efes",
+      "tipo": "Convenio",
+      "status": "em_triagem",
+      "createdAt": "2026-10-22T12:06:30.187Z"
+    },
+    {
+      "id": 1792671365875,
+      "nome": "fawdawfae",
+      "cpf": "fsefaw",
+      "documento": "fsefaw",
+      "sexo": "Feminino",
+      "motivo": "Exame",
+      "nomeMae": "wdwad",
+      "estadoCivil": "Solteiro",
+      "endereco": "awfe",
+      "telefone": "efsef",
+      "email": "fsef",
+      "contatoEmergencia": "efes",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-10-22T12:16:05.875Z"
+    },
+    {
+      "id": 1792672174148,
+      "nome": "mauricio",
+      "cpf": "1212323",
+      "documento": "1212323",
+      "sexo": "Nao informado",
+      "motivo": "Urgência",
+      "nomeMae": "ffff",
+      "estadoCivil": "Viuvo",
+      "endereco": "dsadsd",
+      "telefone": "2123231",
+      "email": "feff",
+      "contatoEmergencia": "ffefs",
+      "tipo": "Particular",
+      "status": "em_consulta",
+      "createdAt": "2026-10-22T12:29:34.148Z"
     }
   ],
   "triagens": [
@@ -105,7 +255,8 @@
       "sintomas": "teste",
       "temp": "test",
       "risco": "verde",
-      "alergia": "teste"
+      "alergia": "teste",
+      "status": "concluida"
     },
     {
       "id": 1776857490380,
@@ -114,7 +265,7 @@
       "temp": "",
       "risco": "vermelho",
       "alergia": "",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1776857571101,
@@ -123,7 +274,7 @@
       "temp": "39",
       "risco": "vermelho",
       "alergia": "pipiro",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1776865942693,
@@ -132,7 +283,7 @@
       "temp": "40",
       "risco": "vermelho",
       "alergia": "mulher ",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1776868937414,
@@ -141,7 +292,7 @@
       "temp": "44",
       "risco": "vermelho",
       "alergia": "mulher",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1776871956701,
@@ -150,7 +301,7 @@
       "temp": "48",
       "risco": "vermelho",
       "alergia": "MULHER",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1777895934510,
@@ -159,7 +310,7 @@
       "temp": "50",
       "risco": "vermelho",
       "alergia": "mulhrter",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1778595086172,
@@ -168,7 +319,7 @@
       "temp": "90",
       "risco": "verde",
       "alergia": "teste",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1778595396331,
@@ -177,7 +328,7 @@
       "temperatura": 39,
       "alergia": "dorflex",
       "risco": "vermelho",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1778595502464,
@@ -186,7 +337,7 @@
       "temperatura": 37,
       "alergia": "nao",
       "risco": "amarelo",
-      "status": "aguardando_medico"
+      "status": "concluida"
     },
     {
       "id": 1778596152632,
@@ -196,7 +347,7 @@
       "alergia": "nao",
       "observacao": "teste",
       "risco": "vermelho",
-      "status": "aguardando_medico",
+      "status": "concluida",
       "createdAt": "2026-05-12T14:29:12.632Z"
     },
     {
@@ -207,7 +358,7 @@
       "alergia": "nao",
       "observacao": "awrwarwara",
       "risco": "amarelo",
-      "status": "aguardando_medico",
+      "status": "concluida",
       "createdAt": "2026-05-13T12:16:54.881Z"
     },
     {
@@ -218,7 +369,7 @@
       "alergia": "dipirona",
       "observacao": "nenhuma ",
       "risco": "vermelho",
-      "status": "aguardando_medico",
+      "status": "concluida",
       "createdAt": "2026-05-14T14:02:14.260Z"
     },
     {
@@ -229,7 +380,7 @@
       "alergia": "nao ",
       "observacao": "teste",
       "risco": "vermelho",
-      "status": "aguardando_medico",
+      "status": "concluida",
       "createdAt": "2026-05-14T14:17:30.255Z"
     },
     {
@@ -240,7 +391,7 @@
       "alergia": "dipirona",
       "observacao": "",
       "risco": "vermelho",
-      "status": "aguardando_medico",
+      "status": "concluida",
       "createdAt": "2026-05-15T11:17:15.856Z"
     },
     {
@@ -251,7 +402,7 @@
       "alergia": "testger",
       "observacao": "tewwetewst",
       "risco": "vermelho",
-      "status": "aguardando_medico",
+      "status": "concluida",
       "createdAt": "2026-06-02T13:06:29.261Z"
     },
     {
@@ -262,8 +413,141 @@
       "alergia": "sd",
       "observacao": "sad",
       "risco": "verde",
-      "status": "aguardando_medico",
+      "status": "concluida",
       "createdAt": "2026-08-06T15:42:26.287Z"
+    },
+    {
+      "id": 1792668564780,
+      "pacienteId": 1787748576692,
+      "nome": "ffsvsvd",
+      "sintoma": "",
+      "temperatura": 0,
+      "alergia": "",
+      "observacao": "",
+      "risco": "verde",
+      "status": "concluida",
+      "createdAt": "2026-10-22T11:29:24.780Z"
+    },
+    {
+      "id": 1792668577691,
+      "pacienteId": null,
+      "nome": "ffsvsvd",
+      "sintoma": "",
+      "temperatura": 0,
+      "alergia": "",
+      "observacao": "",
+      "risco": "verde",
+      "status": "concluida",
+      "createdAt": "2026-10-22T11:29:37.692Z"
+    },
+    {
+      "id": 1792668588380,
+      "pacienteId": 1787668443381,
+      "nome": "maurici0",
+      "sintoma": "",
+      "temperatura": 0,
+      "alergia": "",
+      "observacao": "",
+      "risco": "verde",
+      "status": "concluida",
+      "createdAt": "2026-10-22T11:29:48.380Z"
+    },
+    {
+      "id": 1792668603179,
+      "pacienteId": 1776857728699,
+      "nome": "Paciente sem nome",
+      "sintoma": "",
+      "temperatura": 0,
+      "alergia": "",
+      "observacao": "",
+      "risco": "verde",
+      "status": "concluida",
+      "createdAt": "2026-10-22T11:30:03.179Z"
+    },
+    {
+      "id": 1792670429699,
+      "pacienteId": null,
+      "nome": "dvdsvdsf",
+      "sintoma": "",
+      "temperatura": null,
+      "pressaoArterial": "",
+      "frequenciaCardiaca": null,
+      "saturacaoOxigenio": null,
+      "duracaoSintomas": "",
+      "nivelDor": null,
+      "alergia": "",
+      "observacao": "",
+      "risco": "verde",
+      "status": "encaminhado",
+      "createdAt": "2026-10-22T12:00:29.699Z"
+    },
+    {
+      "id": 1792670682460,
+      "pacienteId": 1792670397996,
+      "nome": "dwdfefesfe",
+      "sintoma": "",
+      "temperatura": null,
+      "pressaoArterial": "",
+      "frequenciaCardiaca": null,
+      "saturacaoOxigenio": null,
+      "duracaoSintomas": "",
+      "nivelDor": null,
+      "alergia": "fesf",
+      "observacao": "effes",
+      "risco": "verde",
+      "status": "concluida",
+      "createdAt": "2026-10-22T12:04:42.460Z"
+    },
+    {
+      "id": 1792670697227,
+      "pacienteId": 1792670636634,
+      "nome": "scvzscvzs",
+      "sintoma": "",
+      "temperatura": null,
+      "pressaoArterial": "",
+      "frequenciaCardiaca": null,
+      "saturacaoOxigenio": null,
+      "duracaoSintomas": "",
+      "nivelDor": null,
+      "alergia": "fesf",
+      "observacao": "effes",
+      "risco": "verde",
+      "status": "aguardando_medico",
+      "createdAt": "2026-10-22T12:04:57.227Z"
+    },
+    {
+      "id": 1792672196869,
+      "pacienteId": 1792670790187,
+      "nome": "fesves",
+      "sintoma": "",
+      "temperatura": null,
+      "pressaoArterial": "",
+      "frequenciaCardiaca": null,
+      "saturacaoOxigenio": null,
+      "duracaoSintomas": "",
+      "nivelDor": null,
+      "alergia": "",
+      "observacao": "",
+      "risco": "verde",
+      "status": "aguardando_medico",
+      "createdAt": "2026-10-22T12:29:56.869Z"
+    },
+    {
+      "id": 1792672223812,
+      "pacienteId": 1792672174148,
+      "nome": "mauricio",
+      "sintoma": "coriza",
+      "temperatura": 0.43,
+      "pressaoArterial": "",
+      "frequenciaCardiaca": null,
+      "saturacaoOxigenio": null,
+      "duracaoSintomas": "",
+      "nivelDor": null,
+      "alergia": "ss",
+      "observacao": "efef",
+      "risco": "verde",
+      "status": "em_consulta",
+      "createdAt": "2026-10-22T12:30:23.812Z"
     }
   ],
   "consultas": [
@@ -410,6 +694,380 @@
       "medicacao": "Paracetamol",
       "obs": "nenhpçççuma ",
       "createdAt": "2026-08-17T15:31:57.196Z"
+    },
+    {
+      "id": 1792668162874,
+      "paciente": "dwd",
+      "diagnostico": "",
+      "medicacao": "Dipirona",
+      "obs": "sad",
+      "createdAt": "2026-10-22T11:22:42.874Z"
+    },
+    {
+      "id": 1792669387365,
+      "triagemId": 1776170673545,
+      "paciente": "test",
+      "diagnostico": "dgsdfsefes",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:43:07.365Z"
+    },
+    {
+      "id": 1792669405018,
+      "triagemId": 1792668564780,
+      "paciente": "ffsvsvd",
+      "diagnostico": "wdfafeawf",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:43:25.018Z"
+    },
+    {
+      "id": 1792669415883,
+      "triagemId": 1792668577691,
+      "paciente": "ffsvsvd",
+      "diagnostico": "sadsad",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:43:35.883Z"
+    },
+    {
+      "id": 1792669421611,
+      "triagemId": 1792668603179,
+      "paciente": "Paciente sem nome",
+      "diagnostico": "efesfef",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:43:41.611Z"
+    },
+    {
+      "id": 1792669427867,
+      "triagemId": 1792668588380,
+      "paciente": "maurici0",
+      "diagnostico": "efesf",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:43:47.867Z"
+    },
+    {
+      "id": 1792669438339,
+      "triagemId": 1778768250255,
+      "paciente": "teste8",
+      "diagnostico": "efesfs",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "teste",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:43:58.339Z"
+    },
+    {
+      "id": 1792669544778,
+      "triagemId": 1778843835856,
+      "paciente": "adriana ",
+      "diagnostico": "sdaq",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:45:44.778Z"
+    },
+    {
+      "id": 1792669552011,
+      "triagemId": 1780405589261,
+      "paciente": "teste",
+      "diagnostico": "dawdw",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "tewwetewst",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:45:52.011Z"
+    },
+    {
+      "id": 1792669558971,
+      "triagemId": 1786030946287,
+      "paciente": "dwd",
+      "diagnostico": "dwad",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "sad",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:45:58.971Z"
+    },
+    {
+      "id": 1792669566091,
+      "triagemId": 1778595502464,
+      "paciente": "teste",
+      "diagnostico": "dawd",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:46:06.091Z"
+    },
+    {
+      "id": 1792669574739,
+      "triagemId": 1776857490380,
+      "paciente": "teste",
+      "diagnostico": "wadwa",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:46:14.739Z"
+    },
+    {
+      "id": 1792669581123,
+      "triagemId": 1778767334260,
+      "paciente": "yan",
+      "diagnostico": "wdawd",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "nenhuma",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:46:21.123Z"
+    },
+    {
+      "id": 1792669588146,
+      "triagemId": 1778674614881,
+      "paciente": "teste",
+      "diagnostico": "efsf",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "awrwarwara",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:46:28.146Z"
+    },
+    {
+      "id": 1792669594329,
+      "triagemId": 1777895934510,
+      "paciente": "teste08",
+      "diagnostico": "efesf",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:46:34.329Z"
+    },
+    {
+      "id": 1792669601507,
+      "triagemId": 1778595086172,
+      "paciente": "testee444",
+      "diagnostico": "fesfesf",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:46:41.507Z"
+    },
+    {
+      "id": 1792669608690,
+      "triagemId": 1778595396331,
+      "paciente": "teste",
+      "diagnostico": "efesfes",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:46:48.690Z"
+    },
+    {
+      "id": 1792669616098,
+      "triagemId": 1778596152632,
+      "paciente": "teste08",
+      "diagnostico": "sefesf",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "teste",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:46:56.098Z"
+    },
+    {
+      "id": 1792669623371,
+      "triagemId": 1776857571101,
+      "paciente": "Emily",
+      "diagnostico": "efsefse",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:47:03.371Z"
+    },
+    {
+      "id": 1792669629955,
+      "triagemId": 1776865942693,
+      "paciente": "jesus",
+      "diagnostico": "efesf",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:47:09.955Z"
+    },
+    {
+      "id": 1792669636651,
+      "triagemId": 1776868937414,
+      "paciente": "kinder ovo ",
+      "diagnostico": "efesfe",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:47:16.651Z"
+    },
+    {
+      "id": 1792669964227,
+      "triagemId": 1776871956701,
+      "paciente": "ENZO",
+      "diagnostico": "effwef",
+      "medicacao": "esffesfesf",
+      "dose": "vg",
+      "frequencia": "effe",
+      "duracao": "",
+      "obs": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T11:52:44.227Z"
+    },
+    {
+      "id": 1792671076022,
+      "triagemId": 1792670429699,
+      "paciente": "dvdsvdsf",
+      "diagnostico": "feffes",
+      "medicacao": "fesfe",
+      "dose": "fesf",
+      "frequencia": "ef",
+      "duracao": "fesefe",
+      "obs": "efefses",
+      "destino": "fefsef",
+      "desfecho": "encaminhamento",
+      "createdAt": "2026-10-22T12:11:16.022Z"
+    },
+    {
+      "id": 1792671297307,
+      "triagemId": 1792670682460,
+      "paciente": "dwdfefesfe",
+      "diagnostico": "gsegefef",
+      "medicacao": "",
+      "dose": "",
+      "frequencia": "",
+      "duracao": "",
+      "obs": "effes",
+      "destino": "",
+      "desfecho": "alta",
+      "createdAt": "2026-10-22T12:14:57.307Z"
     }
-  ]
+  ],
+  "ultimoNumeroChamada": 3,
+  "chamadaAtualTV": {
+    "id": 1792672240940,
+    "numero": "M-003",
+    "paciente": "mauricio",
+    "localTipo": "CONSULTÓRIO MÉDICO",
+    "horario": "2026-10-22T12:30:40.940Z"
+  },
+  "historicoChamadasTV": [
+    {
+      "id": 1792672240940,
+      "numero": "M-003",
+      "paciente": "mauricio",
+      "localTipo": "CONSULTÓRIO MÉDICO",
+      "horario": "2026-10-22T12:30:40.940Z"
+    },
+    {
+      "id": 1792672201172,
+      "numero": "T-002",
+      "paciente": "mauricio",
+      "localTipo": "TRIAGEM",
+      "horario": "2026-10-22T12:30:01.172Z"
+    },
+    {
+      "id": 1792671287171,
+      "numero": "M-002",
+      "paciente": "dwdfefesfe",
+      "localTipo": "CONSULTÓRIO MÉDICO",
+      "horario": "2026-10-22T12:14:47.171Z"
+    },
+    {
+      "id": 1792671242435,
+      "numero": "T-001",
+      "paciente": "fesves",
+      "localTipo": "TRIAGEM",
+      "horario": "2026-10-22T12:14:02.435Z"
+    },
+    {
+      "id": 1792671007605,
+      "numero": "M-001",
+      "paciente": "dvdsvdsf",
+      "localTipo": "CONSULTÓRIO MÉDICO",
+      "horario": "2026-10-22T12:10:07.605Z"
+    }
+  ],
+  "pacienteTriagemAtivaId": null,
+  "triagemMedicaAtivaId": 1792672223812,
+  "ultimoNumeroChamadaMedico": 3,
+  "chamadasAtuaisTV": {
+    "medico": {
+      "id": 1792672240940,
+      "numero": "M-003",
+      "paciente": "mauricio",
+      "localTipo": "CONSULTÓRIO MÉDICO",
+      "horario": "2026-10-22T12:30:40.940Z"
+    },
+    "triagem": {
+      "id": 1792672201172,
+      "numero": "T-002",
+      "paciente": "mauricio",
+      "localTipo": "TRIAGEM",
+      "horario": "2026-10-22T12:30:01.172Z"
+    }
+  },
+  "ultimoNumeroChamadaTriagem": 2
 }

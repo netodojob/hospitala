@@ -8,78 +8,250 @@
 
 <div class="container">
 
-  <h2>🩺 Painel Médico</h2>
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">MEDFLOW · ATENDIMENTO</p>
+      <h1>🩺 Painel Médico</h1>
+      <p class="page-intro">Pacientes aguardando atendimento e registro da consulta.</p>
+    </div>
+    <div class="header-actions">
+      <a class="button-secondary" href="tv.html" target="_blank" rel="noopener">Abrir TV</a>
+      <button class="button-secondary" type="button" onclick="iniciar()">Atualizar fila</button>
+    </div>
+  </header>
 
-  <div id="triagens"></div>
+  <section class="queue-section">
+    <div class="section-heading">
+      <div>
+        <h2>Fila de pacientes</h2>
+        <p>Chame um paciente para começar o atendimento.</p>
+      </div>
+      <span id="contadorFila" class="queue-count">0 aguardando</span>
+    </div>
+    <div id="triagens" aria-live="polite"></div>
+  </section>
 
-  <hr>
+  <section class="consult-section" id="consult-section">
+    <div class="section-heading">
+      <div>
+        <h2>Consulta</h2>
+        <p>Registre o diagnóstico, o plano e o desfecho do atendimento.</p>
+      </div>
+    </div>
 
-  <h3>Consulta</h3>
+    <div class="form-grid">
+      <label class="field field-full">
+        Paciente chamado
+        <input id="paciente" placeholder="Escolha um paciente na fila" readonly>
+      </label>
 
-  <input id="paciente" placeholder="Paciente" readonly>
+      <label class="field field-full">
+        Diagnóstico
+        <input id="diagnostico" placeholder="Informe o diagnóstico">
+      </label>
 
-  <input id="diagnostico" placeholder="Diagnóstico">
+      <label class="field">
+        Medicamento
+        <select id="medicacao">
+          <option value="">Nenhum / não se aplica</option>
+        </select>
+      </label>
 
-  <select id="medicacao">
-    <option value="">Selecione a medicação</option>
-  </select>
+      <label class="field">
+        Outro medicamento
+        <input id="medicacaoOutro" placeholder="Se não estiver na lista">
+      </label>
 
-  <textarea id="obs" placeholder="Observações"></textarea>
+      <label class="field">
+        Dose
+        <input id="dose" placeholder="Conforme prescrição">
+      </label>
 
-  <button onclick="salvar()">Salvar</button>
+      <label class="field">
+        Frequência
+        <input id="frequencia" placeholder="Ex.: conforme prescrição">
+      </label>
+
+      <label class="field">
+        Duração
+        <input id="duracao" placeholder="Ex.: conforme prescrição">
+      </label>
+
+      <label class="field">
+        Desfecho
+        <select id="desfecho" onchange="atualizarDestino()">
+          <option value="alta">Alta</option>
+          <option value="observacao">Manter em observação</option>
+          <option value="encaminhamento">Encaminhar</option>
+        </select>
+      </label>
+
+      <label class="field field-full" id="destinoField" hidden>
+        Destino do encaminhamento
+        <input id="destino" placeholder="Hospital, unidade ou setor de destino">
+      </label>
+
+      <label class="field field-full">
+        Orientações e observações
+        <textarea id="obs" placeholder="Anote orientações, retorno ou outras informações"></textarea>
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button class="button-primary" type="button" onclick="salvar()">Salvar consulta e finalizar</button>
+    </div>
+
+    <div class="print-options" aria-live="polite">
+      <div>
+        <h3>Imprimir documentos</h3>
+        <p id="printStatus">Salve uma consulta para habilitar a impressão.</p>
+      </div>
+      <div class="print-buttons">
+        <button id="printPrescription" class="button-secondary" type="button" onclick="imprimirDocumento('receita')" disabled>
+          Imprimir receita / medicação
+        </button>
+        <button id="printDischarge" class="button-secondary" type="button" onclick="imprimirDocumento('resumo')" disabled>
+          Imprimir alta / destino
+        </button>
+      </div>
+    </div>
+  </section>
 
 </div>
 
 <script>
 
 let triagensCarregadas = [];
+let triagemSelecionada = null;
+let ultimaConsultaSalva = null;
 
-function carregar() {
-  fetch("/triagens")
-    .then(r => r.json())
-    .then(data => {
-      triagensCarregadas = data;
-
-      const div = document.getElementById("triagens");
-      div.innerHTML = "";
-
-      data.forEach((t, index) => {
-        div.innerHTML += `
-          <div class="card">
-            <h3>${t.nome}</h3>
-
-            <p><b>Sintoma:</b> ${t.sintoma || "Não informado"}</p>
-
-            <p><b>Temperatura:</b> ${t.temperatura || "Não informada"}°C</p>
-
-            <p>
-              <span class="${t.risco}">
-                ${t.risco}
-              </span>
-            </p>
-
-            <p><b>Alergia:</b> ${t.alergia || "Nenhuma"}</p>
-
-            <p><b>Observação:</b> ${t.observacao || "Nenhuma"}</p>
-
-            <button onclick="selecionar(${index})">
-              Atender
-            </button>
-          </div>
-        `;
-      });
-    });
+async function iniciar() {
+  await restaurarConsultaAtiva();
+  await carregar();
 }
 
-function selecionar(index) {
+function escaparHTML(valor) {
+  return String(valor ?? "").replace(/[&<>"']/g, caractere => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[caractere]);
+}
+
+async function carregar() {
+  const div = document.getElementById("triagens");
+  div.innerHTML = `<p class="empty-state">Carregando fila...</p>`;
+
+  try {
+    const resposta = await fetch("/triagens");
+    if (!resposta.ok) throw new Error("Não foi possível carregar a fila.");
+
+    const data = await resposta.json();
+    if (!Array.isArray(data)) throw new Error("A resposta da fila está inválida.");
+
+    triagensCarregadas = data;
+    document.getElementById("contadorFila").textContent =
+      `${data.length} aguardando`;
+    div.innerHTML = "";
+
+    if (data.length === 0) {
+      div.innerHTML = `<p class="empty-state">Não há pacientes aguardando atendimento.</p>`;
+      return;
+    }
+
+    data.forEach((t, index) => {
+      const risco = ["verde", "amarelo", "vermelho"].includes(t.risco)
+        ? t.risco
+        : "";
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-heading">
+          <h3>${escaparHTML(t.nome || "Paciente sem nome")}</h3>
+          <span class="risk-badge ${risco}">${escaparHTML(t.risco || "Sem classificação")}</span>
+        </div>
+        <p><b>Sintoma:</b> ${escaparHTML(t.sintoma || "Não informado")}</p>
+        <p><b>Temperatura:</b> ${escaparHTML(t.temperatura ?? "Não informada")}${t.temperatura == null ? "" : " °C"}</p>
+        <p><b>Pressão:</b> ${escaparHTML(t.pressaoArterial || "Não informada")}</p>
+        <p><b>Frequência cardíaca:</b> ${escaparHTML(t.frequenciaCardiaca ?? "Não informada")}${t.frequenciaCardiaca == null ? "" : " bpm"}</p>
+        <p><b>Saturação:</b> ${escaparHTML(t.saturacaoOxigenio ?? "Não informada")}${t.saturacaoOxigenio == null ? "" : "%"}</p>
+        <p><b>Duração dos sintomas:</b> ${escaparHTML(t.duracaoSintomas || "Não informada")}</p>
+        <p><b>Nível de dor:</b> ${escaparHTML(t.nivelDor ?? "Não informado")}${t.nivelDor == null ? "" : "/10"}</p>
+        <p><b>Alergias:</b> ${escaparHTML(t.alergia || "Nenhuma informada")}</p>
+        <p><b>Observação:</b> ${escaparHTML(t.observacao || "Nenhuma")}</p>
+        <button class="button-primary call-button" type="button" onclick="selecionar(${index}, this)">Chamar para consulta</button>
+      `;
+      div.appendChild(card);
+    });
+  } catch (erro) {
+    console.error(erro);
+    document.getElementById("contadorFila").textContent = "Indisponível";
+    div.innerHTML = `<p class="empty-state error-state">Não foi possível carregar os pacientes. Tente atualizar a fila.</p>`;
+  }
+}
+
+async function selecionar(index, botao) {
+  if (triagemSelecionada) {
+    alert("Finalize a consulta atual antes de chamar outro paciente.");
+    return;
+  }
+
   const t = triagensCarregadas[index];
 
-  document.getElementById("paciente").value = t.nome;
-  document.getElementById("obs").value = t.observacao || "";
+  botao.disabled = true;
+  try {
+    const resposta = await fetch(`/triagens/${encodeURIComponent(t.id)}/chamar`, {
+      method: "POST"
+    });
+    if (!resposta.ok) {
+      const erro = await resposta.json().catch(() => ({}));
+      throw new Error(erro.erro || "Não foi possível chamar o paciente.");
+    }
 
-  if (t.alergia && t.alergia !== "Nenhuma") {
-    alert("⚠️ Paciente possui alergia: " + t.alergia);
+    triagemSelecionada = await resposta.json();
+    document.getElementById("paciente").value = triagemSelecionada.nome || "";
+    document.getElementById("obs").value = triagemSelecionada.observacao || "";
+    document.getElementById("consult-section").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    if (triagemSelecionada.alergia && triagemSelecionada.alergia !== "Nenhuma") {
+      alert("Atenção: alergias registradas: " + triagemSelecionada.alergia);
+    }
+    await carregar();
+  } catch (erro) {
+    console.error(erro);
+    botao.disabled = false;
+    alert(erro.message || "Não foi possível chamar esse paciente. Atualize a fila e tente novamente.");
   }
+}
+
+async function restaurarConsultaAtiva() {
+  try {
+    const resposta = await fetch("/triagens/consulta-ativa", { cache: "no-store" });
+    if (!resposta.ok) throw new Error("Não foi possível verificar a consulta ativa.");
+
+    const dados = await resposta.json();
+    triagemSelecionada = dados.triagem || null;
+    document.getElementById("paciente").value = triagemSelecionada?.nome || "";
+    document.getElementById("obs").value = triagemSelecionada?.observacao || "";
+  } catch (erro) {
+    console.error(erro);
+    alert("Não foi possível recuperar a consulta em andamento.");
+  }
+}
+
+function atualizarDestino() {
+  const encaminhamento =
+    document.getElementById("desfecho").value === "encaminhamento";
+  const destinoField = document.getElementById("destinoField");
+  const destino = document.getElementById("destino");
+
+  destinoField.hidden = !encaminhamento;
+  destino.required = encaminhamento;
 }
 
 function carregarMedicacoes() {
@@ -88,9 +260,7 @@ function carregarMedicacoes() {
     .then(data => {
       const select = document.getElementById("medicacao");
 
-      select.innerHTML = `
-        <option value="">Selecione a medicação</option>
-      `;
+      select.innerHTML = `<option value="">Nenhum / não se aplica</option>`;
 
       data.forEach(med => {
         const option = document.createElement("option");
@@ -101,46 +271,176 @@ function carregarMedicacoes() {
     });
 }
 
-function salvar() {
+async function salvar() {
   const paciente = document.getElementById("paciente").value;
-  const diagnostico = document.getElementById("diagnostico").value;
-  const medicacao = document.getElementById("medicacao").value;
-  const obs = document.getElementById("obs").value;
+  const diagnostico = document.getElementById("diagnostico").value.trim();
+  const medicacao = document.getElementById("medicacaoOutro").value.trim()
+    || document.getElementById("medicacao").value;
+  const dose = document.getElementById("dose").value.trim();
+  const frequencia = document.getElementById("frequencia").value.trim();
+  const duracao = document.getElementById("duracao").value.trim();
+  const desfecho = document.getElementById("desfecho").value;
+  const destino = document.getElementById("destino").value.trim();
+  const obs = document.getElementById("obs").value.trim();
 
-  if (!paciente) {
-    alert("Selecione um paciente clicando em Atender.");
+  if (!paciente || !triagemSelecionada) {
+    alert("Chame um paciente da fila antes de salvar a consulta.");
     return;
   }
 
-  if (!medicacao) {
-    alert("Selecione uma medicação.");
+  if (!diagnostico) {
+    alert("Informe o diagnóstico.");
     return;
   }
 
-  fetch("/consulta", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      paciente,
-      diagnostico,
-      medicacao,
-      obs
-    })
-  })
-  .then(r => r.json())
-  .then(() => {
-    alert("Consulta salva");
+  if (desfecho === "encaminhamento" && !destino) {
+    alert("Informe o destino do encaminhamento.");
+    document.getElementById("destino").focus();
+    return;
+  }
 
+  try {
+    const resposta = await fetch("/consulta", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        triagemId: triagemSelecionada.id,
+        paciente,
+        diagnostico,
+        medicacao,
+        dose,
+        frequencia,
+        duracao,
+        desfecho,
+        destino,
+        obs
+      })
+    });
+
+    if (!resposta.ok) throw new Error("Não foi possível salvar a consulta.");
+
+    ultimaConsultaSalva = {
+      ...(await resposta.json()),
+      triagem: triagemSelecionada
+    };
+    document.getElementById("printStatus").textContent =
+      `Documentos prontos para ${ultimaConsultaSalva.paciente}. Use os botões para escolher o que imprimir.`;
+    document.getElementById("printDischarge").disabled = false;
+    document.getElementById("printPrescription").disabled = !ultimaConsultaSalva.medicacao;
+
+    alert("Consulta salva.");
+    triagemSelecionada = null;
+    document.getElementById("paciente").value = "";
     document.getElementById("diagnostico").value = "";
     document.getElementById("medicacao").value = "";
+    document.getElementById("medicacaoOutro").value = "";
+    document.getElementById("dose").value = "";
+    document.getElementById("frequencia").value = "";
+    document.getElementById("duracao").value = "";
+    document.getElementById("desfecho").value = "alta";
+    document.getElementById("destino").value = "";
+    atualizarDestino();
     document.getElementById("obs").value = "";
-  });
+    await iniciar();
+  } catch (erro) {
+    console.error(erro);
+    alert("Não foi possível salvar a consulta. Tente novamente.");
+  }
 }
 
-carregar();
+function imprimirDocumento(tipo) {
+  if (!ultimaConsultaSalva) {
+    alert("Salve a consulta antes de imprimir.");
+    return;
+  }
+
+  const consulta = ultimaConsultaSalva;
+  const data = new Date(consulta.createdAt || Date.now()).toLocaleString("pt-BR");
+  const isReceita = tipo === "receita";
+  const titulo = isReceita ? "Receita / medicação" : "Resumo do atendimento";
+  const conteudo = isReceita
+    ? `
+      <section>
+        <h2>Prescrição registrada</h2>
+        <p><strong>Medicamento:</strong> ${escaparHTML(consulta.medicacao || "Não informado")}</p>
+        <p><strong>Dose:</strong> ${escaparHTML(consulta.dose || "Não informada")}</p>
+        <p><strong>Frequência:</strong> ${escaparHTML(consulta.frequencia || "Não informada")}</p>
+        <p><strong>Duração:</strong> ${escaparHTML(consulta.duracao || "Não informada")}</p>
+        <p class="disclaimer">Confira e complete as informações conforme a prescrição do profissional responsável.</p>
+      </section>`
+    : `
+      <section>
+        <h2>Resumo clínico</h2>
+        <p><strong>Diagnóstico:</strong> ${escaparHTML(consulta.diagnostico || "Não informado")}</p>
+        <p><strong>Queixa/sintoma:</strong> ${escaparHTML(consulta.triagem?.sintoma || "Não informado")}</p>
+        <p><strong>Temperatura:</strong> ${escaparHTML(consulta.triagem?.temperatura ?? "Não informada")}${consulta.triagem?.temperatura == null ? "" : " °C"}</p>
+        <p><strong>Pressão arterial:</strong> ${escaparHTML(consulta.triagem?.pressaoArterial || "Não informada")}</p>
+        <p><strong>Frequência cardíaca:</strong> ${escaparHTML(consulta.triagem?.frequenciaCardiaca ?? "Não informada")}${consulta.triagem?.frequenciaCardiaca == null ? "" : " bpm"}</p>
+        <p><strong>Saturação:</strong> ${escaparHTML(consulta.triagem?.saturacaoOxigenio ?? "Não informada")}${consulta.triagem?.saturacaoOxigenio == null ? "" : "%"}</p>
+        <p><strong>Alergias:</strong> ${escaparHTML(consulta.triagem?.alergia || "Nenhuma informada")}</p>
+        <p><strong>Desfecho:</strong> ${escaparHTML(rotuloDesfecho(consulta.desfecho))}</p>
+        ${consulta.destino ? `<p><strong>Destino:</strong> ${escaparHTML(consulta.destino)}</p>` : ""}
+        ${consulta.medicacao ? `<p><strong>Medicação registrada:</strong> ${escaparHTML(consulta.medicacao)}</p>` : ""}
+        ${consulta.dose ? `<p><strong>Dose:</strong> ${escaparHTML(consulta.dose)}</p>` : ""}
+        ${consulta.frequencia ? `<p><strong>Frequência:</strong> ${escaparHTML(consulta.frequencia)}</p>` : ""}
+        ${consulta.duracao ? `<p><strong>Duração:</strong> ${escaparHTML(consulta.duracao)}</p>` : ""}
+        <p><strong>Orientações:</strong><br>${escaparHTML(consulta.obs || "Nenhuma orientação registrada.").replace(/\n/g, "<br>")}</p>
+      </section>`;
+
+  const janela = window.open("", "_blank", "width=850,height=700");
+  if (!janela) {
+    alert("O navegador bloqueou a janela de impressão. Permita pop-ups para este site e tente novamente.");
+    return;
+  }
+
+  janela.document.write(`<!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>${escaparHTML(titulo)} - ${escaparHTML(consulta.paciente)}</title>
+      <style>
+        body { margin: 0; padding: 36px; color: #1e293b; font: 15px Arial, sans-serif; }
+        main { max-width: 760px; margin: auto; }
+        header { padding-bottom: 18px; border-bottom: 2px solid #147d70; }
+        h1 { margin: 0 0 8px; color: #135e56; font-size: 25px; }
+        h2 { margin-top: 26px; font-size: 18px; }
+        p { line-height: 1.6; }
+        .meta { color: #64748b; font-size: 13px; }
+        .signature { margin-top: 80px; width: 280px; padding-top: 8px; border-top: 1px solid #334155; text-align: center; }
+        .disclaimer { margin-top: 28px; color: #64748b; font-size: 12px; }
+        @media print { body { padding: 0; } }
+      </style>
+    </head>
+    <body>
+      <main>
+        <header>
+          <h1>${escaparHTML(titulo)}</h1>
+          <p><strong>Paciente:</strong> ${escaparHTML(consulta.paciente || "Não informado")}</p>
+          <p class="meta">Emitido em ${escaparHTML(data)}</p>
+        </header>
+        ${conteudo}
+        <div class="signature">Assinatura e identificação profissional</div>
+      </main>
+      <script>window.onload = () => window.print();<\/script>
+    </body>
+    </html>`);
+  janela.document.close();
+}
+
+function rotuloDesfecho(desfecho) {
+  const rotulos = {
+    alta: "Alta",
+    observacao: "Manter em observação",
+    encaminhamento: "Encaminhamento"
+  };
+  return rotulos[desfecho] || "Não informado";
+}
+
+iniciar();
 carregarMedicacoes();
+atualizarDestino();
+setInterval(carregar, 10000);
 
 </script>
 

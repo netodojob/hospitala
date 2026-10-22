@@ -1,36 +1,471 @@
+
 <!DOCTYPE html>
-<html>
-<head><link rel="stylesheet" href="css/atendimento.css"></head>
-<body>
-<div class="container">
-<h2>Atendimento</h2>
+<html lang="pt-BR">
 
-<input id="nome" placeholder="Nome">
-<input id="cpf" placeholder="CPF">
+<head>
 
-<select id="tipo">
-  <option>Convenio</option>
-  <option>Particular</option>
-</select>
+  <meta charset="UTF-8">
 
-<input type="file" id="foto">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<button onclick="cadastrar()">Cadastrar</button>
-</div>
+  <title>MedFlow | Atendimento</title>
 
-<script>
-function cadastrar(){
- fetch("http://localhost:3000/atendimento",{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body: JSON.stringify({
-    nome: nome.value,
-    cpf: cpf.value,
-    tipo: tipo.value
-  })
- });
- alert("Paciente enviado para triagem");
-}
-</script>
+  <link rel="stylesheet" href="css/atendimento.css">
+  <link rel="stylesheet" href="css/theme.css">
+
+</head>
+
+
+<body class="site-page">
+
+  <div class="container">
+
+    <h2>Atendimento</h2>
+
+
+    <!-- NOME COMPLETO -->
+
+    <input
+      id="nome"
+      type="text"
+      placeholder="Nome completo"
+    >
+
+
+    <!-- DOCUMENTO -->
+
+    <input
+      id="documento"
+      type="text"
+      placeholder="CPF / RG ou outro documento"
+    >
+
+
+    <!-- SEXO -->
+
+    <select id="sexo">
+
+      <option value="">
+        Sexo
+      </option>
+
+      <option value="Feminino">
+        Feminino
+      </option>
+
+      <option value="Masculino">
+        Masculino
+      </option>
+
+      <option value="Outro">
+        Outro
+      </option>
+
+      <option value="Nao informado">
+        Prefiro não informar
+      </option>
+
+    </select>
+
+
+    <!-- NOME DA MÃE -->
+
+    <input
+      id="nomeMae"
+      type="text"
+      placeholder="Nome da mãe"
+    >
+
+
+    <!-- ESTADO CIVIL -->
+
+    <select id="estadoCivil">
+
+      <option value="">
+        Estado civil
+      </option>
+
+      <option value="Solteiro">
+        Solteiro(a)
+      </option>
+
+      <option value="Casado">
+        Casado(a)
+      </option>
+
+      <option value="Divorciado">
+        Divorciado(a)
+      </option>
+
+      <option value="Viuvo">
+        Viúvo(a)
+      </option>
+
+      <option value="Uniao estavel">
+        União estável
+      </option>
+
+      <option value="Outro">
+        Outro
+      </option>
+
+    </select>
+
+
+    <!-- ENDEREÇO -->
+
+    <input
+      id="endereco"
+      type="text"
+      placeholder="Endereço completo"
+    >
+
+
+    <!-- TELEFONE -->
+
+    <input
+      id="telefone"
+      type="tel"
+      placeholder="Telefone"
+    >
+
+
+    <!-- E-MAIL -->
+
+    <input
+      id="email"
+      type="email"
+      placeholder="E-mail"
+    >
+
+
+    <!-- CONTATO DE EMERGÊNCIA -->
+
+    <input
+      id="contatoEmergencia"
+      type="text"
+      placeholder="Contato de emergência"
+    >
+
+
+    <!-- TIPO DE ATENDIMENTO -->
+
+    <select id="tipo">
+
+      <option value="Convenio">
+        Convênio
+      </option>
+
+      <option value="Particular">
+        Particular
+      </option>
+
+    </select>
+
+    <!-- MOTIVO DO ATENDIMENTO -->
+
+    <select id="motivo">
+      <option value="">Motivo do atendimento</option>
+      <option value="Consulta">Consulta</option>
+      <option value="Exame">Exame</option>
+      <option value="Retorno">Retorno</option>
+      <option value="Urgência">Urgência</option>
+      <option value="Outro">Outro</option>
+    </select>
+
+
+    <!-- FOTO -->
+
+    <input
+      type="file"
+      id="foto"
+      accept="image/*"
+    >
+
+
+    <!-- BOTÃO -->
+
+    <button
+      type="button"
+      onclick="cadastrar()"
+    >
+      Cadastrar
+    </button>
+
+
+  </div>
+
+
+  <script>
+
+    async function cadastrar() {
+
+      const nome =
+        document.getElementById("nome").value.trim();
+
+      const documento =
+        document.getElementById("documento").value.trim();
+
+      const sexo =
+        document.getElementById("sexo").value;
+
+      const nomeMae =
+        document.getElementById("nomeMae").value.trim();
+
+      const estadoCivil =
+        document.getElementById("estadoCivil").value;
+
+      const endereco =
+        document.getElementById("endereco").value.trim();
+
+      const telefone =
+        document.getElementById("telefone").value.trim();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const contatoEmergencia =
+        document
+          .getElementById("contatoEmergencia")
+          .value
+          .trim();
+
+      const tipo =
+        document.getElementById("tipo").value;
+
+      const motivo =
+        document.getElementById("motivo").value;
+
+
+      /* ==============================
+         VALIDAÇÃO
+      ============================== */
+
+      if (!nome) {
+
+        alert("Digite o nome completo.");
+
+        return;
+
+      }
+
+
+      if (!documento) {
+
+        alert("Digite o CPF, RG ou outro documento.");
+
+        return;
+
+      }
+
+
+      if (!sexo) {
+
+        alert("Selecione o sexo.");
+
+        return;
+
+      }
+
+
+      if (!nomeMae) {
+
+        alert("Digite o nome da mãe.");
+
+        return;
+
+      }
+
+
+      if (!estadoCivil) {
+
+        alert("Selecione o estado civil.");
+
+        return;
+
+      }
+
+
+      if (!endereco) {
+
+        alert("Digite o endereço.");
+
+        return;
+
+      }
+
+
+      if (!telefone) {
+
+        alert("Digite o telefone.");
+
+        return;
+
+      }
+
+
+      if (!email) {
+
+        alert("Digite o e-mail.");
+
+        return;
+
+      }
+
+
+      if (!contatoEmergencia) {
+
+        alert("Digite o contato de emergência.");
+
+        return;
+
+      }
+
+      if (!motivo) {
+
+        alert("Selecione o motivo do atendimento.");
+
+        return;
+
+      }
+
+
+      /* ==============================
+         ENVIO PARA O BACKEND
+      ============================== */
+
+      try {
+
+        const resposta =
+          await fetch(
+            "http://localhost:3000/atendimento",
+            {
+
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+
+                nome: nome,
+
+                /* Mantém compatibilidade
+                   com o backend antigo */
+
+                cpf: documento,
+
+                documento: documento,
+
+                sexo: sexo,
+
+                motivo: motivo,
+
+                nomeMae: nomeMae,
+
+                estadoCivil: estadoCivil,
+
+                endereco: endereco,
+
+                telefone: telefone,
+
+                email: email,
+
+                contatoEmergencia:
+                  contatoEmergencia,
+
+                tipo: tipo
+
+              })
+
+            }
+          );
+
+
+        if (!resposta.ok) {
+
+          throw new Error(
+            "Erro ao cadastrar paciente"
+          );
+
+        }
+
+
+        alert(
+          "Paciente enviado para triagem!"
+        );
+
+
+        /* Limpa o formulário */
+
+        document
+          .getElementById("nome")
+          .value = "";
+
+        document
+          .getElementById("documento")
+          .value = "";
+
+        document
+          .getElementById("sexo")
+          .value = "";
+
+        document
+          .getElementById("nomeMae")
+          .value = "";
+
+        document
+          .getElementById("estadoCivil")
+          .value = "";
+
+        document
+          .getElementById("endereco")
+          .value = "";
+
+        document
+          .getElementById("telefone")
+          .value = "";
+
+        document
+          .getElementById("email")
+          .value = "";
+
+        document
+          .getElementById("contatoEmergencia")
+          .value = "";
+
+        document
+          .getElementById("tipo")
+          .value = "Convenio";
+
+        document
+          .getElementById("motivo")
+          .value = "";
+
+        document
+          .getElementById("foto")
+          .value = "";
+
+
+      } catch (erro) {
+
+        console.error(erro);
+
+        alert(
+          "Erro ao conectar com o servidor."
+        );
+
+      }
+
+    }
+
+  </script>
+
 </body>
+
 </html>

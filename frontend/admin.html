@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de usuários</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body class="site-page admin-page">
+    <main class="container">
+        <h2>Cadastro</h2>
+        <a class="back-link" href="index.html">Voltar para a página inicial</a>
+        <h2 class="section-title">Cadastrar usuário</h2>
+
+        <form id="formusuario">
+         <input type="text" id="usuario" placeholder="Nome de usuário(login)" required>
+         <input type="password" id="senha" placeholder="Senha" required>
+
+
+         <select id="tipo" required>
+            <option value="">Selecione o setor</option>
+            <option value="atendimento">atendimento</option>
+            <option value="triagem">Triagem</option>
+            <option value="medico">Médico</option>
+        </select>
+        
+         <button type="submit">Cadastrar usuario </button>
+        </form>
+
+        <hr>
+
+        <h3>Usuários Cadastrados</h3>
+        
+        <div id="listaUsuarios"></div>
+    </main>
+
+        <script>
+        const API_BASE = location.protocol === 'file:' ||
+            ((location.hostname === 'localhost' || location.hostname === '127.0.0.1') && location.port !== '3000')
+            ? 'http://localhost:3000'
+            : '';
+
+        //1 cadastra usuario ao enviar o formulario
+        document.getElementById('formusuario').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita o envio do formulário
+
+            const usuario = document.getElementById('usuario').value;
+            const senha = document.getElementById('senha').value;
+            const tipo = document.getElementById('tipo').value;
+
+           fetch(`${API_BASE}/usuarios`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                     usuario,
+                     senha,
+                     tipo
+                })
+            })
+            .then(async res => {
+                const dados = await res.json();
+                if (!res.ok) {
+                    throw new Error(dados.erro || "Não foi possível cadastrar o usuário.");
+                }
+                return dados;
+            })
+            .then(() => {
+                alert("Usuário cadastrado com sucesso!");
+                document.getElementById('formusuario').reset();
+                carregarUsuarios();
+            })
+            .catch(erro => {
+                alert(erro.message);
+            });
+        });
+        //2 carrega usuarios cadastrados
+        function carregarUsuarios() {
+            fetch(`${API_BASE}/usuarios`)
+                .then(async res => {
+                    const dados = await res.json();
+                    if (!res.ok) {
+                        throw new Error(dados.erro || "Não foi possível carregar os usuários.");
+                    }
+                    return dados;
+                })
+                .then(dados => {
+                    const div = document.getElementById('listaUsuarios');
+                    div.replaceChildren();
+
+                    dados.forEach(usuario => {
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        const informacoes = document.createElement('span');
+                        informacoes.textContent = `Usuário: ${usuario.usuario} | Setor: ${usuario.tipo}`;
+
+                        const botaoExcluir = document.createElement('button');
+                        botaoExcluir.type = 'button';
+                        botaoExcluir.className = 'delete-button';
+                        botaoExcluir.textContent = 'Excluir';
+                        botaoExcluir.addEventListener('click', () => excluirUsuario(usuario.usuario));
+
+                        card.append(informacoes, botaoExcluir);
+                        div.appendChild(card);
+                    });
+                })
+                .catch(erro => {
+                    alert(erro.message);
+                });
+        }
+
+        async function excluirUsuario(usuario) {
+            if (!confirm(`Tem certeza que deseja excluir o usuário "${usuario}"?`)) {
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/usuarios/${encodeURIComponent(usuario)}`, {
+                    method: 'DELETE'
+                });
+                const dados = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(dados.erro || 'Não foi possível excluir o usuário.');
+                }
+
+                carregarUsuarios();
+            } catch (erro) {
+                alert(erro.message);
+            }
+        }
+
+        //caregar a lita automaticamente ao abrir a pagina
+        carregarUsuarios();
+
+        </script>
+    
+</body>
+</html>
